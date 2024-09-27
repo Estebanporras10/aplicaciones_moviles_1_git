@@ -1,0 +1,556 @@
+===============================================================================================
+Institute....: Universidad Técnica Nacional
+Campus.......: Pacífico
+Career.......: Tecnologías de Información
+Course.......: ITI-623 - Desarrollo de Aplicaciones Móviles I
+Period.......: 3-2024
+Document.....: 03_Intents.txt
+Goals........: Calls between interfaces with arguments or parameters 
+References...: https://developer.android.com/guide/components/intents-filters
+Professor....: Jorge Ruiz (york)
+Student......:
+===============================================================================================
+
+Step 01 - Open Android Studio (Giraffe version)
+
+
+Step 02 - Create Empty Views Activity
+
+	Name...........: 03_Intents
+	Package name...: com.demoyork.a03_intents
+	Save location..: D:\Documentos\Laboratorios\Android\3_2024\03_Intents
+	Language.......: Kotlin
+	Minimum SDK....: API 30 ("R", Android 11.0)
+	Build Config...: Kotlin DSL (build.gradle.kts)[Recommended]
+	
+	
+Step 03 - Custom application image
+
+	- Download University logo (png file) at your local machine
+	
+	- Right click over app (root Android project)
+		- Select New option
+			- Select Image Asset option
+							
+				Icon type...: Launcher Icons (Adaptative and Legacy)
+				Name........: ic_launcher
+				
+				Foreground Layer:
+					- Layer name...: ic_launcher_foreground
+					- Source Asset.: image and select image path
+					- Scaling......: 75% -> (Trim : yes)
+					
+				Background Layer:
+					- Layer name...: ic_launcher_background
+					- Source Asset.: don't change anything
+					- Scaling......: 0% -> (Trim : no) 
+					
+			- Click on Next button
+
+			- Click in Finish button
+
+
+Step 04 - Changes main activity interface
+
+	- Open app/res/values/strings.xml, and writes:	
+	
+		<string name="lblID">Cédula</string>
+		<string name="lblNom">Nombre</string>
+		<string name="lblSex">Sexo</string>
+		<string name="lblFecN">Nacido</string>
+		<string name="lblFeme">Femenino</string>
+		<string name="lblMasc">Masculino</string>
+		<string name="btnAcep">Aceptar</string>
+		<string name="lblNac">Nacido</string>
+		
+	- Saves changes
+
+	- Open	app/res/layout/activity_main.xml
+	
+		- Delete all content.
+		
+		- Writes the next code:
+		
+			<?xml version="1.0" encoding="utf-8"?>
+			<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				tools:context=".MainActivity">
+
+				<LinearLayout
+					android:id="@+id/linearLayout"
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					android:layout_marginStart="5dp"
+					android:layout_marginEnd="5dp"
+					android:orientation="vertical"
+					android:padding="10px"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintVertical_bias="0.497">
+
+					<ImageView
+						android:layout_width="96sp"
+						android:layout_height="96sp"
+						android:layout_gravity="center"
+						android:src="@mipmap/ic_launcher" />
+
+					<TextView
+						android:id="@+id/textView"
+						android:layout_width="match_parent"
+						android:layout_height="48dp"
+						android:gravity="center"
+						android:text="Universidad Técnica Nacional"
+						android:textSize="20sp"
+						android:textStyle="bold" />
+
+					<View
+						android:id="@+id/divider"
+						android:layout_width="wrap_content"
+						android:layout_height="2dp"
+						android:background="?android:attr/listDivider"
+						tools:layout_editor_absoluteX="8dp"
+						tools:layout_editor_absoluteY="115dp" />
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical"
+						android:padding="16dp">
+
+
+						<TableLayout
+							android:layout_width="match_parent"
+							android:layout_height="match_parent">
+
+							<TableRow
+								android:layout_width="match_parent"
+								android:layout_height="match_parent">
+
+								<TextView
+									android:id="@+id/textView2"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:text="@string/lblID"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+								<EditText
+									android:id="@+id/txtCedula"
+									android:layout_width="314dp"
+									android:layout_height="48dp"
+									android:ems="10"
+									android:hint="@string/lblID"
+									android:inputType="number"
+									android:selectAllOnFocus="true"
+									android:singleLine="true" />
+
+							</TableRow>
+
+							<TableRow
+								android:layout_width="match_parent"
+								android:layout_height="match_parent">
+
+								<TextView
+									android:id="@+id/textView3"
+									android:layout_width="102dp"
+									android:layout_height="wrap_content"
+									android:text="@string/lblNom"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+								<EditText
+									android:id="@+id/txtNombre"
+									android:layout_width="287dp"
+									android:layout_height="48dp"
+									android:ems="10"
+									android:hint="@string/lblNom"
+									android:inputType="textPersonName" />
+							</TableRow>
+
+							<TableRow
+								android:layout_width="match_parent"
+								android:layout_height="match_parent">
+
+								<TextView
+									android:id="@+id/textView4"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:text="@string/lblSex"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+								<RadioGroup
+									android:id="@+id/grpRadio"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content">
+
+									<RadioButton
+										android:id="@+id/rbtFemenino"
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_weight="1"
+										android:checked="true"
+										android:text="@string/lblFeme" />
+
+									<RadioButton
+										android:id="@+id/rbtMasculino"
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_weight="1"
+										android:text="@string/lblMasc" />
+								</RadioGroup>
+							</TableRow>
+
+							<TableRow
+								android:layout_width="match_parent"
+								android:layout_height="match_parent">
+
+								<TextView
+									android:id="@+id/textView5"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:text="@string/lblFecN"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+								<EditText
+									android:id="@+id/fecNacido"
+									android:layout_width="wrap_content"
+									android:layout_height="48dp"
+									android:ems="10"
+									android:hint="@string/lblFecN"
+									android:inputType="date" />
+
+							</TableRow>
+
+							<TableRow
+								android:layout_width="match_parent"
+								android:layout_height="match_parent">
+
+								<Button
+									android:id="@+id/btnOK"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:onClick="ejecutar"
+									android:text="@string/btnAcep" />
+							</TableRow>
+						</TableLayout>
+					</LinearLayout>
+				</LinearLayout>
+
+			</androidx.constraintlayout.widget.ConstraintLayout>
+
+	- Saves changes
+
+
+Step 05 - Add new activity
+
+	- Right click over app (root Android project)
+		- Select New option
+			- Select Activity (Empty Views Activity)
+			
+				Activity Name..........: ProcesarActivity
+				Generate a Layout File.: checked
+				Layout Name............: activity_procesar
+				Launcher Activity......: Not checked
+				Package Name...........: com.demoyork.a03_intents
+				Source Language........: Kotlin
+				Target Source Set......: main
+				
+	
+Step 06 - Changes procesar activity interface	
+	
+	- Open	app/res/layout/activity_procesar.xml
+	
+		- Delete all content.
+		
+		- Writes the next code:
+		
+			<?xml version="1.0" encoding="utf-8"?>
+			<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				tools:context=".ProcesarActivity">
+
+				<LinearLayout
+					android:id="@+id/linearLayout"
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					android:layout_marginStart="5dp"
+					android:layout_marginEnd="5dp"
+					android:orientation="vertical"
+					android:padding="10px"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintVertical_bias="0.497">
+
+					<ImageView
+						android:layout_width="96sp"
+						android:layout_height="96sp"
+						android:layout_gravity="center"
+						android:src="@mipmap/ic_launcher" />
+
+					<TextView
+						android:id="@+id/textView"
+						android:layout_width="match_parent"
+						android:layout_height="48dp"
+						android:gravity="center"
+						android:text="Universidad Técnica Nacional"
+						android:textSize="20sp"
+						android:textStyle="bold" />
+
+					<View
+						android:id="@+id/divider"
+						android:layout_width="wrap_content"
+						android:layout_height="2dp"
+						android:background="?android:attr/listDivider"
+						tools:layout_editor_absoluteX="8dp"
+						tools:layout_editor_absoluteY="115dp" />
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical"
+						android:padding="16dp">
+
+
+						<TableLayout
+							android:layout_width="match_parent"
+							android:layout_height="match_parent">
+
+							<TableRow
+								android:layout_width="match_parent"
+								android:layout_height="match_parent">
+
+								<TextView
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:text="@string/lblID"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+								<EditText
+
+									android:id="@+id/lblCedula"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:ems="10"
+									android:inputType="number"
+									android:selectAllOnFocus="true"
+									android:singleLine="true" />
+
+							</TableRow>
+
+							<TableRow
+								android:layout_width="match_parent"
+								android:layout_height="match_parent">
+
+								<TextView
+									android:id="@+id/textView3"
+									android:layout_width="102dp"
+									android:layout_height="wrap_content"
+									android:text="@string/lblNom"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+								<EditText
+									android:id="@+id/lblNombre"
+									android:layout_width="287dp"
+									android:layout_height="wrap_content"
+									android:ems="10"
+									android:inputType="textPersonName" />
+							</TableRow>
+
+							<TableRow
+								android:layout_width="match_parent"
+								android:layout_height="match_parent">
+
+								<TextView
+									android:id="@+id/textView4"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:text="@string/lblSex"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+								<EditText
+									android:id="@+id/lblSexo"
+									android:layout_width="287dp"
+									android:layout_height="wrap_content"
+									android:ems="10"
+									android:inputType="textPersonName" />
+
+
+							</TableRow>
+
+							<TableRow
+								android:layout_width="match_parent"
+								android:layout_height="match_parent">
+
+								<TextView
+									android:id="@+id/textView5"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:text="@string/lblNac"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+								<EditText
+									android:id="@+id/lblNacido"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:ems="10"
+									android:inputType="date" />
+
+							</TableRow>
+						</TableLayout>
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</androidx.constraintlayout.widget.ConstraintLayout>
+		
+	- Saves changes
+
+
+Step 07 - Update Main Activity class
+
+	- Open app/java/<dominio>.<aplicacion>/MainActivity.kt file
+	
+		- In the import section add the following libraries	
+		
+			import android.view.View
+			import android.widget.EditText
+			import android.widget.RadioButton
+			import android.widget.Toast
+			
+			
+		- Before at onCreate() function, writes:
+		
+			private lateinit var txtCedula: EditText
+			private lateinit var txtNombre: EditText
+			private lateinit var fecNacido: EditText
+			private lateinit var rbtFemenino: RadioButton
+			
+		
+		- Into the onCreate() function, writes:
+
+			txtCedula   = findViewById(R.id.txtCedula)
+			txtNombre   = findViewById(R.id.txtNombre)
+			fecNacido   = findViewById(R.id.fecNacido)
+			rbtFemenino = findViewById(R.id.rbtFemenino)
+			
+			
+		- After onCreate() function, but into the the Main Activity class, writes:	
+		
+			fun ejecutar(view: View) {
+				var aplicar = true
+				if (txtCedula.getText().toString().trim({ it <= ' ' }).length == 0) {
+					Toast.makeText(this, "Id requerido", Toast.LENGTH_SHORT).show()
+					txtCedula.requestFocus()
+					aplicar = false
+				}
+
+				if (txtNombre.getText().toString().trim({ it <= ' ' }).length == 0 && aplicar) {
+					Toast.makeText(this, "Nombre requerido", Toast.LENGTH_SHORT).show()
+					txtNombre.requestFocus()
+					aplicar = false
+				}
+
+				if (fecNacido.getText().toString().trim({ it <= ' ' }).length == 0 && aplicar) {
+					Toast.makeText(this, "Fecha requerida", Toast.LENGTH_SHORT).show()
+					fecNacido.requestFocus()
+					aplicar = false
+				}
+
+				if (aplicar) {
+					//Invoca otra ventana
+					val laotra = Intent(this, ProcesarActivity::class.java)
+					var sexo = 'F'
+
+					if (rbtFemenino.isChecked) {
+						sexo = 'F'
+					} else {
+						sexo = 'M'
+					}
+
+					laotra.putExtra("id", txtCedula.getText())
+					laotra.putExtra("nombre", txtNombre.getText())
+					laotra.putExtra("sexo", sexo)
+					laotra.putExtra("nacido", fecNacido.getText())
+
+					startActivity(laotra)
+
+				}//fin del if de aplicar
+			}//fin del método ejecutar		
+		
+	
+	- Saves changes	
+	
+
+Step 08 - Update Procesar Activity class
+
+	- Open app/java/<dominio>.<aplicacion>/ProcesarActivity.kt file
+	
+		- In the import section add the following libraries	
+					
+			import android.widget.EditText
+					
+			
+		- Before at onCreate() function, writes:
+
+			private lateinit var lblCedula: EditText
+			private lateinit var lblNombre: EditText
+			private lateinit var lblSexo: EditText
+			private lateinit var lblNacido: EditText
+			
+			
+		- Into the onCreate() function, writes:	
+		
+			val id = Integer.parseInt(intent.extras!!.get("id")!!.toString())
+			val nombre = intent.extras!!.get("nombre")!!.toString()
+			val sexo = intent.extras!!.getChar("sexo")
+			val nacido = intent.extras!!.get("nacido")!!.toString()
+
+			lblCedula = findViewById(R.id.lblCedula)
+			lblNombre = findViewById(R.id.lblNombre)
+			lblSexo = findViewById(R.id.lblSexo)
+			lblNacido = findViewById(R.id.lblNacido)
+
+			lblCedula.setEnabled(false)
+			lblNombre.setEnabled(false)
+			lblSexo.setEnabled(false)
+			lblNacido.setEnabled(false)
+
+			lblCedula.setText(id.toString())
+			lblNombre.setText(nombre)
+			lblSexo.setText(if (sexo.toString() == "F") "Femenino" else "Masculino")
+			lblNacido.setText(nacido)
+			
+	- Save changes
+	
+	
+Step 09 - Update manifest
+
+	- Open app/manifests/AndroidManifest.xml
+	
+		For each activity registered, add the next instruction:
+
+			android:screenOrientation="portrait"
+			
+			
+	- Save changes		
+	
+	
+Step 10 - Test your new application
+
+	Be happy

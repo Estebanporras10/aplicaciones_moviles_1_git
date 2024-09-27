@@ -1,0 +1,266 @@
+===============================================================================================
+Institute....: Universidad Técnica Nacional
+Campus.......: Pacífico
+Career.......: Tecnologías de Información
+Course.......: ITI-623 - Desarrollo de Aplicaciones Móviles I
+Period.......: 3-2024
+Document.....: 07_Fragments.txt
+Goals........: Create and use a toolbar menu
+References...: https://developer.android.com/guide/components/intents-filters
+Professor....: Jorge Ruiz (york)
+Student......:
+===============================================================================================
+
+Step 01 - Open Android Studio (Koala version)
+
+
+Step 02 - Create Empty Views Activity
+
+	Name...........: 07_Fragments
+	Package name...: com.demoyork.a07_fragments
+	Save location..: D:\Documentos\Laboratorios\Android\2_2023\07_Fragments
+	Language.......: Kotlin
+	Minimum SDK....: API 30 ("R", Android 11.0)
+	Build Config...: Kotlin DSL (build.gradle.kts)[Recommended]
+	
+
+Step 03 - Add the new character strings
+
+	- Open app/res/values/strings.xml
+	
+	- Add the new lines:
+	
+		<string name="f1_btnOk">Aceptar 1</string>
+		<string name="f1_Title">Fragmento 1</string>
+		<string name="f1_Message">Soy el Fragmento 1</string>
+
+		<string name="f2_btnOk">Aceptar 2</string>
+		<string name="f2_Title">Fragmento 2</string>
+		<string name="f2_Message">Soy el Fragmento 2</string>	
+	
+	- Saves changes
+	
+	
+Step 04 - Add fragments to Android app
+
+	- Right click over app/res/layout
+		- Select New option
+			- Fragment/Fragment (blank):
+			
+				Variable              | Fragment 1      | Fragment 2 
+				----------------------+-----------------+-----------------
+				Fragment Name         | FirstFragment   | SecondFragment
+				----------------------+-----------------+-----------------
+				Fragment Layout Name  | fragment_first  | fragment_second
+				----------------------+-----------------+-----------------
+				Source Languages      | kotlin
+				
+				
+Step 05 - Changes presentation of fragments
+			
+	- Open app/res/layout/fragment_first.xml
+	
+	- Delete all content
+	
+	- Write the next code:
+	
+		<?xml version="1.0" encoding="utf-8"?>
+		<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:tools="http://schemas.android.com/tools"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="#F19B9B"
+			android:padding="12dp"
+			tools:context=".FirstFragment">
+
+			<!-- TODO: Update blank fragment layout -->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/f1_Title"
+				android:textSize="25dp"
+				android:textAlignment="center"
+				android:textStyle="bold" />
+
+			<Button
+				android:id="@+id/f1_btnOk"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="45dp"
+				android:text="@string/f1_btnOk"
+				android:textSize="18dp"
+				android:textAlignment="center" />
+
+		</FrameLayout>
+	
+	- Saves changes
+	
+	
+	- Open app/res/layout/fragment_second.xml
+	
+	- Delete all content
+	
+	- Write the next code:
+	
+		<?xml version="1.0" encoding="utf-8"?>
+		<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:tools="http://schemas.android.com/tools"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="#79ADD6"
+			android:padding="12dp"
+			tools:context=".SecondFragment">
+
+			<!-- TODO: Update blank fragment layout -->
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/f2_Title"
+				android:textSize="25dp"
+				android:textAlignment="center"
+				android:textStyle="bold" />
+
+			<Button
+				android:id="@+id/f2_btnOk"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="45dp"
+				android:text="@string/f2_btnOk"
+				android:textSize="18dp"
+				android:textAlignment="center" />
+
+		</FrameLayout>
+	
+	- Saves changes
+	
+	
+	- Open app/res/layout/activity_main.xml
+	
+	- Delete all content
+	
+	- Write the next code:
+	
+		<?xml version="1.0" encoding="utf-8"?>
+		<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:app="http://schemas.android.com/apk/res-auto"
+			xmlns:tools="http://schemas.android.com/tools"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:context=".MainActivity">
+
+			<TextView
+				android:id="@+id/txtTitulo"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginEnd="8dp"
+				android:layout_marginBottom="8dp"
+				android:text="@string/app_name"
+				android:textAlignment="center"
+				android:textSize="30dp"
+				app:layout_constraintBottom_toTopOf="@+id/frag_01"
+				app:layout_constraintEnd_toEndOf="@id/frag_01"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<fragment
+				android:id="@+id/frag_01"
+				android:name="com.demoyork.a07_fragments.FirstFragment"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginEnd="8dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/txtTitulo"
+				tools:layout="@layout/fragment_first" />
+
+			<fragment
+				android:id="@+id/frag_02"
+				android:name="com.demoyork.a07_fragments.SecondFragment"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="16dp"
+				android:layout_marginEnd="8dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/frag_01"
+				tools:layout="@layout/fragment_second" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	
+	- Saves changes
+	
+
+Step 06	- Changes fragment behaviour 
+
+	- Open app/java/<dominio>.<aplicacion>/FristFragment.kt file
+	
+		- Add libraries
+		
+			import android.widget.Button
+			import android.widget.Toast
+			
+		
+		- Delete all arguments or parameters references
+		
+		- Delete companion object		
+
+		- Changes onCreateView function:
+
+			override fun onCreateView(
+				inflater: LayoutInflater, container: ViewGroup?,
+				savedInstanceState: Bundle?
+			): View? {
+				// Inflate the layout for this fragment
+				val view = inflater.inflate(R.layout.fragment_first, container, false)
+
+				val f1_btnOk = view.findViewById<Button>(R.id.f1_btnOk)
+				
+				f1_btnOk.setOnClickListener{
+					Toast.makeText(view.context,R.string.f1_Message,Toast.LENGTH_SHORT).show()
+				}
+				return view
+			}
+			
+	- Saves changes	
+		
+		
+	- Open app/java/<dominio>.<aplicacion>/SecondFragment.kt file
+	
+		- Add libraries
+		
+			import android.widget.Button
+			import android.widget.Toast
+			
+		
+		- Delete all arguments or parameters references
+		
+		- Delete companion object		
+
+		- Changes onCreateView function:	
+		
+			override fun onCreateView(
+				inflater: LayoutInflater, container: ViewGroup?,
+				savedInstanceState: Bundle?
+			): View? {
+				// Inflate the layout for this fragment
+				val view = inflater.inflate(R.layout.fragment_second, container, false)
+
+				val f2_btnOk = view.findViewById<Button>(R.id.f2_btnOk)
+
+				f2_btnOk.setOnClickListener{
+					Toast.makeText(view.context,R.string.f2_Message,Toast.LENGTH_SHORT).show()
+				}
+				return view
+			}
+		
+	- Saves changes	
+	
+	
+Step 07 - Run yours new application
+
+	Be happy	

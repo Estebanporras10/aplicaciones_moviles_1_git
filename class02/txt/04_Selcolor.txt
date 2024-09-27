@@ -1,0 +1,440 @@
+===============================================================================================
+Institute....: Universidad Técnica Nacional
+Campus.......: Pacífico
+Career.......: Tecnologías de Información
+Course.......: ITI-623 - Desarrollo de Aplicaciones Móviles I
+Period.......: 3-2024
+Document.....: 04_Selcolor.txt
+Goals........: Calls between interfaces with return values.
+References...: https://developer.android.com/guide/components/intents-filters
+Professor....: Jorge Ruiz (york)
+Student......:
+===============================================================================================
+
+Step 01 - Open Android Studio (Giraffe version)
+
+
+Step 02 - Create Empty Views Activity
+
+	Name...........: 04_Selcolor
+	Package name...: com.demoyork.a04_selcolor
+	Save location..: D:\Documentos\Laboratorios\Android\3_2024\04_Selcolor
+	Language.......: Kotlin
+	Minimum SDK....: API 30 ("R", Android 11.0)
+	Build Config...: Kotlin DSL (build.gradle.kts)[Recommended]
+	
+	
+Step 03 - Changes resources files
+
+	- Open app/res/values/strings.xml, and writes:	
+	
+		<string name="btnSelcolor">Elija su color favorito</string>
+		<string name="lblcolor">El %s es su color favorito</string>
+
+		<string name="lblrojo">Rojo</string>
+		<string name="lblnaranja">Naranja</string>
+		<string name="lblamarillo">Amarillo</string>
+		<string name="lblverde">Verde</string>
+		<string name="lblazul">Azul</string>
+		<string name="lblindigo">Indigo</string>
+		<string name="lblvioleta">Violeta</string>
+		<string name="lblsincolor">Sin definir</string>
+
+		<string name="lblContexto">
+			Esta es una demostración de llamado entre actividades y la recuperación de valores.
+			Por favor presione el botón para elegir su color favorito.
+		</string>
+		
+	- Saves changes	
+	
+	- Open app/res/values/colors.xml, and writes:
+
+		<!-- custom colors -->
+		<color name="rojo">#FF0000</color>
+		<color name="naranja">#FF7F00</color>
+		<color name="amarillo">#FFFF00</color>
+		<color name="verde">#00FF00</color>
+		<color name="azul">#0000FF</color>
+		<color name="indigo">#4B0082</color>
+		<color name="violeta">#9400D3</color>
+	
+	- Saves changes
+	
+
+Step 04 - Add new activity
+
+	- Right click over app (root Android project)
+		- Select New option
+			- Select Activity (Empty Views Activity)
+			
+				Activity Name..........: SelcolorActivity
+				Generate a Layout File.: checked
+				Layout Name............: activity_selcolor
+				Launcher Activity......: Not checked
+				Package Name...........: com.demoyork.a04_selcolor
+				Source Language........: Kotlin
+				Target Source Set......: main
+
+
+Step 05 - Add resources file for dimensions
+
+	- Right click over app (root Android project)
+		- Select New option
+			- Android Resource File
+			
+				File name.......: dimens.xml
+				Resource type...: Values
+				Root element....: resources
+				Source set......: main src/main/res
+				Directory name..: values
+				
+				
+		- Writes the next code:	
+
+			<?xml version="1.0" encoding="utf-8"?>
+			<resources>
+				<dimen name="col_05">5dp</dimen>
+				<dimen name="col_10">10dp</dimen>
+				<dimen name="col_15">15dp</dimen>
+				<dimen name="col_20">20dp</dimen>
+				<dimen name="col_25">25dp</dimen>
+				<dimen name="col_30">30dp</dimen>
+				<dimen name="col_35">35dp</dimen>
+				<dimen name="col_40">40dp</dimen>
+
+				<dimen name="head_1">24sp</dimen>
+				<dimen name="head_2">22sp</dimen>
+				<dimen name="head_3">20sp</dimen>
+
+				<dimen name="par_sz">15sp</dimen>
+				<dimen name="tex_sz">16sp</dimen>
+				
+			</resources>
+			
+		- Saves changes
+		
+
+Step 06 - Changes main activity interface	
+	
+	- Open	app/res/layout/activity_main.xml
+	
+		- Delete all content.
+		
+		- Writes the next code:		
+		
+			<?xml version="1.0" encoding="utf-8"?>
+			<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:padding="@dimen/col_05"
+				tools:context=".MainActivity">
+
+				<TextView
+					android:id="@+id/lblDescrip"
+					android:text="@string/lblContexto"
+					android:textSize="@dimen/par_sz"
+					android:justificationMode="inter_word"
+
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+
+					android:paddingStart="@dimen/col_10"
+					android:paddingEnd="@dimen/col_10"
+
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"/>
+
+				<Button
+					android:id="@+id/btnElejir"
+					android:text="@string/btnSelcolor"
+					android:textSize="@dimen/par_sz"
+
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/col_30"
+
+					app:layout_constraintTop_toBottomOf="@+id/lblDescrip"
+					app:layout_constraintLeft_toLeftOf="parent"
+					app:layout_constraintRight_toRightOf="parent"/>
+
+				<TextView
+					android:id="@+id/lblColor"
+					android:textSize="@dimen/par_sz"
+
+					android:visibility="gone"
+					tools:text="Este es su color favorito"
+
+					android:padding="@dimen/col_15"
+
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/col_30"
+
+					app:layout_constraintTop_toBottomOf="@+id/btnElejir"
+					app:layout_constraintLeft_toLeftOf="parent"
+					app:layout_constraintRight_toRightOf="parent"
+					app:layout_constraintBottom_toBottomOf="parent"/>
+
+			</androidx.constraintlayout.widget.ConstraintLayout>
+		
+	- Saves changes	
+	
+
+Step 07 - Changes selcolor activity interface	
+	
+	- Open	app/res/layout/activity_selcolor.xml
+	
+		- Delete all content.
+		
+		- Writes the next code:			
+		
+			<?xml version="1.0" encoding="utf-8"?>
+			<ScrollView
+				xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_horizontal"
+					android:orientation="vertical"
+					android:padding="@dimen/col_05"
+					android:layout_marginTop="@dimen/col_05"
+					tools:context=".selcolor">
+
+					<TextView
+						android:id="@+id/lblDescrip2"
+						android:text="@string/btnSelcolor"
+						android:textSize="@dimen/tex_sz"
+
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+
+						app:layout_constraintTop_toTopOf="parent"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"/>
+
+					<Button
+						android:id="@+id/btnRojo"
+						android:text="@string/lblrojo"
+						android:backgroundTint="@color/rojo"
+
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/col_05"
+						android:layout_marginLeft="@dimen/col_40"
+						android:layout_marginRight="@dimen/col_40"/>
+
+					<Button
+						android:id="@+id/btnNaranja"
+						android:text="@string/lblnaranja"
+						android:backgroundTint="@color/naranja"
+
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/col_05"
+						android:layout_marginLeft="@dimen/col_40"
+						android:layout_marginRight="@dimen/col_40"/>
+
+					<Button
+						android:id="@+id/btnAmarillo"
+						android:text="@string/lblamarillo"
+						android:backgroundTint="@color/amarillo"
+
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/col_05"
+						android:layout_marginLeft="@dimen/col_40"
+						android:layout_marginRight="@dimen/col_40"/>
+
+					<Button
+						android:id="@+id/btnVerde"
+						android:text="@string/lblverde"
+						android:backgroundTint="@color/verde"
+
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/col_05"
+						android:layout_marginLeft="@dimen/col_40"
+						android:layout_marginRight="@dimen/col_40"/>
+
+					<Button
+						android:id="@+id/btnAzul"
+						android:text="@string/lblazul"
+						android:backgroundTint="@color/azul"
+
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/col_05"
+						android:layout_marginLeft="@dimen/col_40"
+						android:layout_marginRight="@dimen/col_40"/>
+
+					<Button
+						android:id="@+id/btnIndigo"
+						android:text="@string/lblindigo"
+						android:backgroundTint="@color/indigo"
+
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/col_05"
+						android:layout_marginLeft="@dimen/col_40"
+						android:layout_marginRight="@dimen/col_40"/>
+
+					<Button
+						android:id="@+id/btnVioleta"
+						android:text="@string/lblvioleta"
+						android:backgroundTint="@color/violeta"
+
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/col_05"
+						android:layout_marginLeft="@dimen/col_40"
+						android:layout_marginRight="@dimen/col_40"/>
+
+				</LinearLayout>
+
+			</ScrollView>
+		
+	- Saves changes	
+	
+	
+Step 08 - Update Main Activity class
+
+	- Open app/java/<dominio>.<aplicacion>/MainActivity.kt file
+	
+		- In the import section add the following libraries
+
+			import android.app.Activity
+			import android.content.Intent
+			import android.widget.Button
+			import android.widget.TextView
+			import androidx.core.view.isVisible			
+		
+		
+		- Between import section and MainActivity class header declaration
+
+			const val colorIntent = 1
+			const val colorNombre = "Nombre del color"
+			const val colorValor = "Color";
+			
+			
+		- Before at onCreate() function, writes:	
+		
+			private lateinit var btnElejir: Button
+			private lateinit var lblColor: TextView
+			
+			
+		- Into the onCreate() function, writes:
+
+			btnElejir = findViewById(R.id.btnElejir)
+			lblColor = findViewById(R.id.lblColor)
+        
+			btnElejir.setOnClickListener {
+				Intent(this, SelcolorActivity::class.java).also {
+						colorSeleccionado -> startActivityForResult(colorSeleccionado, colorIntent)
+				}
+			}
+			
+			
+		- After onCreate() function, but into the the Main Activity class, writes:
+
+			override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+				super.onActivityResult(requestCode, resultCode, data)
+
+				// validate control variables
+				if(requestCode == colorIntent && resultCode == Activity.RESULT_OK){
+
+					//retrive data color from data extra fields
+					val colorFavoritoV = data?.getIntExtra(colorValor,R.color.white)?:R.color.white
+					val colorFavoritoN = data?.getStringExtra(colorNombre)?:""
+
+					//color chosen message and color, set visible at true
+					lblColor.text = getString(R.string.lblcolor, colorFavoritoN)
+					lblColor.setBackgroundResource(colorFavoritoV)
+					lblColor.isVisible = true
+				}
+			}
+	
+	- Saves changes
+	
+
+Step 09 - Test your application
+
+
+Step 10 - Update Selcolor Activity class
+
+	- Open app/java/<dominio>.<aplicacion>/SelcolorActivity.kt file
+	
+		- In the import section add the following libraries			
+		
+			import android.app.Activity
+			import android.content.Intent
+			import android.view.View
+			import android.widget.Button
+			
+			
+		- Before at onCreate() function, writes:
+		
+			private lateinit var btnAmarillo: Button
+			private lateinit var btnAzul: Button
+			private lateinit var btnIndigo: Button
+			private lateinit var btnNaranja: Button
+			private lateinit var btnRojo: Button
+			private lateinit var btnVerde: Button
+			private lateinit var btnVioleta: Button
+			
+			
+		- Into the onCreate() function, writes:
+
+			btnAmarillo = findViewById(R.id.btnAmarillo)
+			btnAzul = findViewById(R.id.btnAzul)
+			btnIndigo = findViewById(R.id.btnIndigo)
+			btnNaranja = findViewById(R.id.btnNaranja)
+			btnRojo = findViewById(R.id.btnRojo)
+			btnVerde = findViewById(R.id.btnVerde)
+			btnVioleta = findViewById(R.id.btnVioleta)
+
+			val botonClick = View.OnClickListener {
+				view -> when(view.id){
+					R.id.btnRojo     -> setmiColor(getString(R.string.lblrojo)    , R.color.rojo)
+					R.id.btnNaranja  -> setmiColor(getString(R.string.lblnaranja) , R.color.naranja)
+					R.id.btnAmarillo -> setmiColor(getString(R.string.lblamarillo), R.color.amarillo)
+					R.id.btnVerde    -> setmiColor(getString(R.string.lblverde)   , R.color.verde)
+					R.id.btnAzul     -> setmiColor(getString(R.string.lblazul)    , R.color.azul)
+					R.id.btnIndigo   -> setmiColor(getString(R.string.lblindigo)  , R.color.indigo)
+					R.id.btnVioleta  -> setmiColor(getString(R.string.lblvioleta) , R.color.violeta)
+				}
+			}
+
+			btnRojo.setOnClickListener(botonClick)
+			btnNaranja.setOnClickListener(botonClick)
+			btnAmarillo.setOnClickListener(botonClick)
+			btnVerde.setOnClickListener(botonClick)
+			btnAzul.setOnClickListener(botonClick)
+			btnIndigo.setOnClickListener(botonClick)
+			btnVioleta.setOnClickListener(botonClick)
+
+
+		- After onCreate() function
+		
+			private fun setmiColor(nomColor: String, valColor: Int ) {
+				Intent().let { colorSelec ->
+					colorSelec.putExtra(colorNombre, nomColor)
+					colorSelec.putExtra(colorValor, valColor)
+					setResult(Activity.RESULT_OK,colorSelec)
+					finish()
+				}
+			}
+	
+	- Saves changes	
+	
+
+Step 11 - Test your application	
+
+	Be happy

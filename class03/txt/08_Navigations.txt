@@ -1,0 +1,552 @@
+===============================================================================================
+Institute....: Universidad Técnica Nacional
+Campus.......: Pacífico
+Career.......: Tecnologías de Información
+Course.......: ITI-623 - Desarrollo de Aplicaciones Móviles I
+Period.......: 3-2023
+Document.....: 08_Navigations.txt
+Goals........: Create two navigation example with portrait and landscape access
+References...: https://developer.android.com/guide/components/intents-filters
+Professor....: Jorge Ruiz (york)
+Student......:
+===============================================================================================
+
+Step 01 - Open Android Studio (Koala version)
+
+
+Step 02 - Create example 1 -> Bottom Navigation Views Activity
+
+	Name...........: 08_Navigation_01
+	Package name...: com.demoyork.a08_navigation_01
+	Save location..: D:\Documentos\Laboratorios\Android\2_2023\08_Navigation_01
+	Language.......: Kotlin
+	Minimum SDK....: API 30 ("R", Android 11.0)
+	Build Config...: Kotlin DSL (build.gradle.kts)[Recommended]
+	
+
+Step 03 - Changes project configuration
+
+	- Over Android Studio Main Menu
+		- Select File
+			- Select Project Structure (Ctrl + Alt + Shift + S)
+			
+				- Project
+					- Gradle versión...: 8.1
+				
+				- Modules (Properties)
+					- Compile Sdk Version...: 34 (API 34)
+					
+			- If you have any suggestions (please call yours professor)	
+
+		- Yours project maybe sync now
+		
+		- This process take awhile
+		
+		
+Step 04	- Test yours new application
+
+	You will be happy
+		
+
+Step 05 - Changes the character strings
+
+	- Open app/res/values/strings.xml
+	
+		- Changes the current values:
+		
+			<string name="title_home">Inicio</string>
+			<string name="title_dashboard">Pizarra</string>
+			<string name="title_notifications">Notificaciones</string>
+			<string name="title_about">Acerca de...</string>
+			
+			
+		- Add the new lines:
+			
+			<string name="title_about">Acerca de...</string>
+			<string name="message_home">Este es el fragment de Inicio</string>
+			<string name="message_dashboard">Este es el fragment de la Pizarra</string>
+			<string name="message_notifications">Este es el fragment de Notificaciones</string>
+			<string name="message_about">Este es el fragment de Acerca de...</string>
+		
+		
+	- Saves changes
+		
+	
+Step 06 - Changes application behaviour
+
+	- Open app/java/<dominio>.<aplicacion>/ui/dashboard/DashboardFragment.kt
+	
+		- Add libraries:
+		
+			import <dominio>.<applicacion>.R
+			
+			
+		- Applys the next changes (review yours local file and compare this content)	
+		
+			override fun onCreateView(
+				inflater: LayoutInflater,
+				container: ViewGroup?,
+				savedInstanceState: Bundle?
+			): View {
+				_binding = FragmentDashboardBinding.inflate(inflater, container, false)
+				val root: View = binding.root
+
+				var text_dashboard = root.findViewById<TextView>(R.id.text_dashboard)
+				text_dashboard.setText(R.string.message_dashboard)
+				return root
+			}			
+			
+	- Saves changes
+
+	
+	- Open app/java/<dominio>.<aplicacion>/ui/home/HomeFragment.kt		
+			
+		- Add libraries:
+		
+			import <dominio>.<applicacion>.R	
+			
+			
+		- Applys the next changes (review yours local file and compare this content)	
+
+			override fun onCreateView(
+				inflater: LayoutInflater,
+				container: ViewGroup?,
+				savedInstanceState: Bundle?
+			): View {
+				_binding = FragmentHomeBinding.inflate(inflater, container, false)
+				val root: View = binding.root
+
+				var text_home = root.findViewById<TextView>(R.id.text_home)
+				text_home.setText(R.string.message_home)
+				return root
+			}
+
+	- Saves changes
+	
+	
+	- Open app/java/<dominio>.<aplicacion>/ui/notifications/NotificationsFragment.kt		
+			
+		- Add libraries:
+		
+			import <dominio>.<applicacion>.R	
+
+
+		- Applys the next changes (review yours local file and compare this content)
+
+			override fun onCreateView(
+				inflater: LayoutInflater,
+				container: ViewGroup?,
+				savedInstanceState: Bundle?
+			): View {
+				_binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+				val root: View = binding.root
+
+				var text_notifications = root.findViewById<TextView>(R.id.text_notifications)
+				text_notifications.setText(R.string.message_notifications)
+
+				return root
+			}
+
+	- Saves changes
+	
+	
+Step 07 - Delete files (don't need it)
+
+	- app/java/<dominio>.<aplicacion>/ui/dashboard/DashboardViewModel.kt
+	
+	- app/java/<dominio>.<aplicacion>/ui/home/HomeViewModel.kt
+	
+	- app/java/<dominio>.<aplicacion>/ui/notifications/NotificationsViewModel.kt
+	
+	
+Step 08	- Test yours new application again
+
+	Maybe you are happy again
+	
+	
+Step 09 - Add About fragment	
+
+	- Right click over app/java/<dominio>.<aplicacion>/ui
+		- Select New option
+			- Package: about
+			
+			
+	- Right click over app/java/<dominio>.<aplicacion>/ui/about
+		- Select New option
+			- Fragment/Fragment (blank):
+			
+				- Fragment Name.........: AboutFragment				
+				- Fragment Layout Name..: fragment_about				
+				- Source Languages......: kotlin
+		
+		
+	- Open app/res/layout/fragment_about.xml
+	
+		- Delete all content
+		
+		- Write the next code:
+
+			<androidx.constraintlayout.widget.ConstraintLayout 
+			xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:app="http://schemas.android.com/apk/res-auto"
+			xmlns:tools="http://schemas.android.com/tools"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:context=".ui.about.AboutFragment">
+
+			<TextView
+				android:id="@+id/text_about"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginEnd="8dp"
+				android:textAlignment="center"
+				android:textSize="20sp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+	- Saves changes
+	
+	
+	- Open app/java/<dominio>.<aplicacion>/ui/about/AboutFragment
+	
+		- Delete all arguments or parameters references
+		
+		- Delete companion object
+		
+		- Add libraries:
+		
+			import android.widget.TextView
+			import <dominio>.<aplicacion>.databinding.FragmentAboutBinding
+		
+		
+		- Delete onCreate()	function
+			
+		- Add variables before onCreateView()	
+			
+			private var _binding: FragmentAboutBinding? = null
+
+			// This property is only valid between onCreateView and
+			// onDestroyView.
+			private val binding get() = _binding!!
+			
+		
+		- Applys the next changes (review yours local file and compare this content)
+	
+			override fun onCreateView(
+				inflater: LayoutInflater, container: ViewGroup?,
+				savedInstanceState: Bundle?
+			): View? {
+				// Inflate the layout for this fragment
+				val root = inflater.inflate(R.layout.fragment_about, container, false)
+
+				var text_about = root.findViewById<TextView>(R.id.text_about)
+				text_about.setText(R.string.message_about)
+
+				return root
+			}
+			
+			
+		- Add onDestroyView() function, after onCreateView function
+
+			override fun onDestroyView() {
+				super.onDestroyView()
+				_binding = null
+			}
+			
+			
+	- Saves changes
+
+
+	- Open app/res/navigation/mobile_navigation.xml
+
+		- Add the next code at the end of file
+		
+			<fragment
+				android:id="@+id/navigation_about"
+				android:name="<dominio>.<aplicacion>.ui.about.AboutFragment"
+				android:label="@string/title_about"
+				tools:layout="@layout/fragment_about" />
+				
+	- Saves changes		
+
+	
+	- Open app/java/<dominio>.<aplicacion>/MainActivity.kt
+
+		- Seek appBarConfiguration variable (line 27 aprox)
+		
+		- Add the 'About' component into setOf() 
+		
+			R.id.navigation_about
+			
+	- Saves	changes
+	
+	
+	- Add About image
+	
+		- Right click over app
+			- Select New option
+				- Select Vector Asset:
+				
+					- Asset Type..: Clip art
+					- Name........: ic_about_black_24dp
+					- Clip art....: (click on image and select people icon)
+					- Size........: 24 x 24
+					- Color.......: 000000
+					- Opacity.....: 100%
+				
+				- Click Next button
+				
+					- Source set: main src/main/res
+					
+				- Click Finish Button
+
+				
+	- Open app/res/menu/bottom_nav_menu.xml	
+	
+		- Add the next code at the end of file
+					
+			<item
+				android:id="@+id/navigation_about"
+				android:icon="@drawable/ic_about_black_24dp"
+				android:title="@string/title_about" />
+					
+				
+Step 11	- Test yours new application again
+
+	I suposse you are very happy
+
+
+====================================================================
+S E C O N D  -  P R O J E C T
+====================================================================
+
+Step 01 - Open Android Studio (Koala version)
+
+
+Step 02 - Create example 2 -> Navigation Drawer Views Activity
+
+	Name...........: 08_Navigation_02
+	Package name...: com.demoyork.a08_navigation_02
+	Save location..: D:\Documentos\Laboratorios\Android\2_2023\08_Navigation_02
+	Language.......: Kotlin
+	Minimum SDK....: API 30 ("R", Android 11.0)
+	Build Config...: Kotlin DSL (build.gradle.kts)[Recommended]
+
+
+Step 03 - Changes project configuration
+
+	- Over Android Studio Main Menu
+		- Select File
+			- Select Project Structure (Ctrl + Alt + Shift + S)
+			
+				- Project
+					- Gradle versión...: 8.1
+				
+				- Modules (Properties)
+					- Compile Sdk Version...: 34 (API 34)
+					
+			- If you have any suggestions (please call yours professor)	
+
+		- Yours project maybe sync now
+		
+		- This process take awhile
+		
+		
+Step 04	- Test yours new application
+
+	You will be happy
+
+
+Step 05 - Changes the character strings
+
+	- Open app/res/values/strings.xml
+	
+		- Changes the current values:
+
+			<string name="menu_home">Inicio</string>
+			<string name="menu_gallery">Galería</string>
+			<string name="menu_slideshow">Presentación</string>
+			<string name="menu_about">Acerca de...</string>
+
+
+		- Add the new lines:
+	
+			<string name="title_about">Acerca de...</string>
+			<string name="message_home">Este es el fragment de Inicio</string>
+			<string name="message_gallery">Este es el fragment de la Galería</string>
+			<string name="message_slideshow">Este es el fragment de Presentaciones</string>
+			<string name="message_about">Este es el fragment de Acerca de...</string>  
+
+	- Save changes
+	
+	
+Step 06 - Changes the current fragments
+
+	- Locate app/java/<dominio>.<aplicacion>/ui/gallery
+	
+		- Delete GalleryViewModel file
+		
+		- Open GalleyFragment
+		
+			- Delete import resource
+			
+				import androidx.lifecycle.ViewModelProvider
+				
+				
+			- Delete the next instructions on segment View:	
+			
+				val galleryViewModel = ViewModelProvider(this).get(GalleryViewModel::class.java)
+				
+				val textView: TextView = binding.textGallery
+
+				galleryViewModel.text.observe(viewLifecycleOwner) {
+					textView.text = it
+				}
+				
+				
+		- Open app/res/layout/fragment_gallery.xml	
+		
+			- In the TextView Object, add the next code:
+			
+				android:text="@string/message_gallery"
+				
+				
+	- Repeat this step for home and slideshow fragments			
+				
+								
+	- Save all changes 	
+		
+
+Step 07 - Test your changes
+
+	Is all ok, you must happy 
+
+
+Step 08 - Add About fragment	
+
+	- Right click over app/java/<dominio>.<aplicacion>/ui
+		- Select New option
+			- Package: about
+			
+			
+	- Right click over app/java/<dominio>.<aplicacion>/ui/about
+		- Select New option
+			- Fragment/Fragment (blank):
+			
+				- Fragment Name.........: AboutFragment				
+				- Fragment Layout Name..: fragment_about				
+				- Source Languages......: kotlin
+
+
+	- Open app/res/layout/fragment_about.xml	
+	
+		- Delete all code 
+		
+		- Writes the next code:
+		
+			<?xml version="1.0" encoding="utf-8"?>
+			<androidx.constraintlayout.widget.ConstraintLayout 
+				xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				tools:context=".ui.about.AboutFragment">
+
+				<TextView
+					android:id="@+id/text_about"
+					android:text="@string/message_about"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="8dp"
+					android:layout_marginTop="8dp"
+					android:layout_marginEnd="8dp"
+					android:textAlignment="center"
+					android:textSize="20sp"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent" />
+			</androidx.constraintlayout.widget.ConstraintLayout>
+		
+		
+	- Save changes
+
+
+	- Add About image
+	
+		- Right click over app
+			- Select New option
+				- Select Vector Asset:
+				
+					- Asset Type..: Clip art
+					- Name........: ic_about_black_24dp
+					- Clip art....: (click on image and select people icon)
+					- Size........: 24 x 24
+					- Color.......: 000000
+					- Opacity.....: 100%
+				
+				- Click Next button
+				
+					- Source set: main src/main/res
+					
+				- Click Finish Button
+
+
+	- Add About navigation reference
+	
+		- Open app/res/navigation/mobile_navigation.xml	(open view code)
+		
+			- Add the next reference at the end of file:  (remember to use yours domain)
+			
+				<fragment
+					android:id="@+id/nav_about"
+					android:name="com.demoyork.a08_navigation_02.ui.about.AboutFragment"
+					android:label="@string/menu_about"
+					tools:layout="@layout/fragment_about" />
+	
+		- Save changes
+		
+		
+	- Add About drawer reference
+	
+		- Open app/res/menu/activity_main_drawer.xml	(open view code)	
+		
+			- Add the next reference at the end of file:
+			
+				<item
+					android:id="@+id/nav_about"
+					android:icon="@drawable/baseline_people_24"
+					android:title="@string/menu_about" />
+		
+		- Save changes
+		
+
+	- Modify Main Activity:
+	
+		- Open app/java/<dominio>.<aplicacion>/MainActivity.kt
+		
+		- Locate appBarConfiguration variable, maybe in line 38, and add 
+		  in the setOf() function, the next option:
+
+			R.id.nav_about
+			
+		  	
+   - Save changes
+
+   
+Step 09 - Test your changes
+
+	Is all ok, you must happy you are living in the Y.U.P.I time
+   
+
+ 
+
+		

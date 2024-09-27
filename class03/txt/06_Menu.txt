@@ -1,0 +1,248 @@
+==================================================================================================
+Institute....: Universidad Técnica Nacional
+Campus.......: Pacífico
+Career.......: Tecnologías de Información
+Course.......: ITI-623 - Desarrollo de Aplicaciones Móviles I
+Period.......: 3-2024
+Document.....: 06_Menu.txt
+Goals........: Create and use a toolbar menu
+References...: https://developer.android.com/reference/androidx/appcompat/widget/Toolbar?hl=en
+Professor....: Jorge Ruiz (york)
+Student......:
+==================================================================================================
+
+Step 01 - Open Android Studio (Koala version)
+
+
+Step 02 - Create Empty Views Activity
+
+	Name...........: 06_Menu
+	Package name...: com.demoyork.a06_menu
+	Save location..: D:\Documentos\Laboratorios\Android\2_2023\06_Menu
+	Language.......: Kotlin
+	Minimum SDK....: API 30 ("R", Android 11.0)
+	Build Config...: Kotlin DSL (build.gradle.kts)[Recommended]
+	
+
+Step 03 - Update strings values
+
+	- Open 	app/res/values/strings.xml
+	
+	- Add the following values:
+	
+		<string name="gretting">Hola a todos</string>
+		<string name="action_settings">Configuración</string>
+		<string name="red">Rojo</string>
+		<string name="green">Verde</string>
+		<string name="yellow">Amarillo</string>
+		<string name="blue">Azul</string>
+		<string name="black">Negro</string>
+	
+	- Saves Changes
+	
+	
+Step 04 - Add menu resource
+
+	- Right click over app/res (resources directory)
+		- Select New option
+			- Android Resource File:
+			
+				- File name.......: menu_main
+				- Resource type...: Menu
+				- Root element....: menu
+				- Source set......: main src/main/res
+				- Directory name..: menu
+				
+			- Click Ok button	
+				
+	- Open app/res/menu/menu_main.xml
+
+		- Add the next content:
+			
+			<group android:checkableBehavior="single" >
+				<item
+						android:id="@+id/menu_red"
+						android:title="@string/red" />
+				<item
+						android:id="@+id/menu_green"
+						android:title="@string/green" />
+				<item
+						android:id="@+id/menu_yellow"
+						android:title="@string/yellow" />
+				<item
+						android:id="@+id/menu_blue"
+						android:title="@string/blue" />
+				<item
+						android:id="@+id/menu_black"
+						android:title="@string/black" />
+			</group>
+			
+			
+	- Saves Changes		
+			
+			
+Step 05 - Add content main resource
+
+	- Right click over app/res/layout (resources directory)
+		- Select New option	
+			- Layout Resource File:
+			
+				- File name.......: content_main
+				- Root element....: androidx.constraintlayour.widget.ConstraintLayout
+				- Source set......: main src/main/res
+				- Directory name..: layout
+			
+			- Click Ok button
+			
+	- Open app/res/layout/content_main.xml
+
+		- Clear all content
+		
+		- Writes the next content:
+	 		
+			<?xml version="1.0" encoding="utf-8"?>
+			<androidx.constraintlayout.widget.ConstraintLayout
+				xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:id="@+id/layoutView"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				app:layout_behavior="@string/appbar_scrolling_view_behavior"
+				tools:context=".MainActivity"
+				tools:showIn="@layout/activity_main"
+				tools:ignore="ExtraText">
+				
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/gretting"
+					android:textSize="32sp"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintLeft_toLeftOf="parent"
+					app:layout_constraintRight_toRightOf="parent"
+					app:layout_constraintTop_toTopOf="parent" />
+
+			</androidx.constraintlayout.widget.ConstraintLayout>
+
+			
+	- Saves Changes
+	
+	
+Step 06 - Changes main activity interface
+
+ 	- Open app/res/layout/activity_main.xml
+	
+		- Clear all content
+		
+		- Writes the next content:
+		
+			<?xml version="1.0" encoding="utf-8"?>
+			<androidx.coordinatorlayout.widget.CoordinatorLayout
+				xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:fitsSystemWindows="true"
+				tools:context=".MainActivity">
+
+				<com.google.android.material.appbar.AppBarLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fitsSystemWindows="true">
+
+					<com.google.android.material.appbar.MaterialToolbar
+						android:id="@+id/toolbar"
+						android:layout_width="match_parent"
+						android:layout_height="?attr/actionBarSize" />
+
+				</com.google.android.material.appbar.AppBarLayout>
+
+				<include layout="@layout/content_main"/>
+
+			</androidx.coordinatorlayout.widget.CoordinatorLayout>
+		
+		
+	- Saves Changes
+
+
+Step 07 - Changes main activity behaviour
+
+	- Open app/java/<dominio>.<aplicacion>/MainActivity.kt file
+	
+		- In the import section add the following libraries			
+	
+			import android.view.Menu
+			import android.view.MenuItem
+			import android.widget.TextView
+			import androidx.constraintlayout.widget.ConstraintLayout
+			import com.google.android.material.appbar.MaterialToolbar
+						
+			
+		- Before at onCreate() function, writes:
+		
+			private lateinit var layoutView: ConstraintLayout
+			private lateinit var toolbar: MaterialToolbar
+			private lateinit var lblGreeting : TextView
+			
+		
+		- Into the onCreate() function, writes:
+		
+			toolbar = findViewById(R.id.toolbar)
+			layoutView = findViewById(R.id.layoutView)
+			lblGreeting = findViewById(R.id.greeting)
+			setSupportActionBar(toolbar)
+			
+		
+		- After onCreate() function
+		
+			override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+				menuInflater.inflate(R.menu.menu_main, menu)
+				return true
+				//return super.onCreateOptionsMenu(menu)
+			}
+
+			override fun onOptionsItemSelected(item: MenuItem): Boolean {
+				when (item.itemId) {
+					R.id.menu_red -> {
+						item.isChecked = !item.isChecked
+						layoutView.setBackgroundColor(android.graphics.Color.RED)
+						lblGreeting.setTextColor(android.graphics.Color.WHITE)
+						return true
+					}
+					R.id.menu_green -> {
+						item.isChecked = !item.isChecked
+						layoutView.setBackgroundColor(android.graphics.Color.GREEN)
+						lblGreeting.setTextColor(android.graphics.Color.BLACK)
+						return true
+					}
+					R.id.menu_yellow -> {
+						item.isChecked = !item.isChecked
+						layoutView.setBackgroundColor(android.graphics.Color.YELLOW)
+						lblGreeting.setTextColor(android.graphics.Color.BLACK)
+						return true
+					}
+					R.id.menu_blue -> {
+						item.isChecked = !item.isChecked
+						layoutView.setBackgroundColor(android.graphics.Color.BLUE)
+						lblGreeting.setTextColor(android.graphics.Color.WHITE)
+						return true
+					}
+					R.id.menu_black -> {
+						item.isChecked = !item.isChecked
+						layoutView.setBackgroundColor(android.graphics.Color.BLACK)
+						lblGreeting.setTextColor(android.graphics.Color.WHITE)
+						return true
+					}
+					else -> return super.onOptionsItemSelected(item)
+				}
+			}
+	
+	
+	- Saves Changes
+	
+	
+Step 08 - Run yours new application
+
+	Be happy

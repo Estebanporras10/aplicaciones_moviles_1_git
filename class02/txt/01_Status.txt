@@ -1,0 +1,238 @@
+===============================================================================================
+Institute....: Universidad Técnica Nacional
+Campus.......: Pacífico
+Career.......: Tecnologías de Información
+Course.......: ITI-623 - Desarrollo de Aplicaciones Móviles I
+Period.......: 3-2024
+Document.....: 01_Status.txt
+Goals........: Try the explain the Activity Lifecycle.
+References...: https://developer.android.com/reference/android/app/Activity#ActivityLifecycle
+Professor....: Jorge Ruiz (york)
+Student......:
+===============================================================================================
+
+Step 01 - Open Android Studio (Koala version)
+
+
+Step 02 - Create Empty Views Activity
+
+	Name...........: 01_Status
+	Package name...: com.demoyork.a01_status
+	Save location..: D:\Documentos\Laboratorios\Android\2_2023\01_Status
+	Language.......: Kotlin
+	Minimum SDK....: API 30 ("R", Android 11.0)
+	Build Config...: Kotlin DSL (build.gradle.kts)[Recommended]
+	
+	
+Step 03 - Update Main Activity class
+
+	- Open app/java/<dominio>.<aplicacion>/MainActivity.kt file
+	
+		- In the import section add the following libraries
+		
+			import android.util.Log
+			import android.widget.Toast	
+
+	
+		- Before at onCreate() function, writes:
+		
+			val TAG = "Estados"
+			
+		
+		- Into the onCreate() function, writes:	
+		
+			//Call logCat
+			Log.i(TAG, "Método onCreate()")
+			Toast.makeText(this,"Método onCreate()",Toast.LENGTH_SHORT).show()
+	
+	
+	- Save changes
+			
+
+Step 04 - Test your application
+
+	Use your cell phone or AVD
+
+
+Step 05 - Add the rest of the application states
+
+	- Open MainActivity.kt file again.
+	
+	- After onCreate() function, but into the the Main Activity class, writes:
+	
+		//Declaring override on all state methods
+		override fun onStart() {
+			super.onStart()
+			Log.i(TAG, "Método onStart()")
+			Toast.makeText(this,
+				"Método onStart()",Toast.LENGTH_SHORT).show()
+		}
+
+		override fun onResume() {
+			super.onResume()
+			Log.i(TAG, "Método onResume()")
+			Toast.makeText(this,
+				"Método onResume()",Toast.LENGTH_SHORT).show()
+		}
+
+		override fun onPause() {
+			super.onPause()
+			Log.i(TAG, "Método onPause()")
+			Toast.makeText(this,
+				"Método onPause()",Toast.LENGTH_SHORT).show()
+		}
+
+		override fun onStop() {
+			super.onStop()
+			Log.i(TAG, "Método onStop()")
+			Toast.makeText(this,
+				"Método onStop()",Toast.LENGTH_SHORT).show()
+		}
+
+		override fun onRestart() {
+			super.onRestart()
+			Log.i(TAG, "Método onRestart()")
+			Toast.makeText(this,
+				"Método onRestart()",Toast.LENGTH_SHORT).show()
+		}
+
+		override fun onDestroy() {
+			super.onDestroy()
+			Log.i(TAG, "Método onDestroy()")
+			Toast.makeText(this,
+				"Método onDestroy()",Toast.LENGTH_SHORT).show()
+		}
+
+
+Step 06 - Test your application again
+
+	- Rotate cell phone.
+	- Sends application to background.
+	- Puts the application in the foreground.
+	
+	
+Step 07 - Changes main activity interface
+
+	- Open app/res/values/strings.xml, and writes:
+	
+		<string name="title">Estados de la aplicación</string>
+		<string name="txtid">Identificación</string>
+		<string name="txtpw">Contraseña</string>
+		
+	- Saves Changes
+
+	- Open app/res/layout/activity_main.xml
+	
+		- Delete all content.
+		
+		- Writes the next code:
+		
+			<?xml version="1.0" encoding="utf-8"?>
+			<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				tools:context=".MainActivity">
+		
+				<TextView
+					android:id="@+id/lblTitulo"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/title"
+					android:textSize="20sp"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintHorizontal_bias="0.497"
+					app:layout_constraintLeft_toLeftOf="parent"
+					app:layout_constraintRight_toRightOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintVertical_bias="0.258" />
+
+				<EditText
+					android:id="@+id/txtID"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="16dp"
+					android:layout_marginRight="16dp"
+					android:layout_marginBottom="28dp"
+					android:autofillHints=""
+					android:ems="15"
+					android:hint="@string/txtid"
+					android:inputType="text"
+					android:saveEnabled="false"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintHorizontal_bias="0.494"
+					app:layout_constraintLeft_toLeftOf="parent"
+					app:layout_constraintRight_toRightOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/lblTitulo"
+					app:layout_constraintVertical_bias="0.226" />
+
+				<EditText
+					android:id="@+id/txtPasswd"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ems="15"
+					android:hint="@string/txtpw"
+					android:inputType="textPassword"
+					android:saveEnabled="false"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/txtID" />
+	
+			</androidx.constraintlayout.widget.ConstraintLayout>
+	
+	
+	- Saves Changes
+
+
+Step 08 - Test your application again
+
+	- Use the widgets.
+	
+
+Step 09 - Changes the application behaviour.
+	
+	- Open app/java/<dominio>.<aplicacion>/MainActivity.kt file again 
+	
+		- Add library
+		
+			import android.widget.EditText
+			
+			
+		- Add local variables (into MainActivity class)	
+		
+			private lateinit var txtID: EditText
+			private lateinit var txtPasswd: EditText
+			
+			
+		- Add instructions into onCreate() function
+
+			txtID =  findViewById(R.id.txtID)
+			txtPasswd = findViewById(R.id.txtPasswd)
+			
+			
+		- After onCreate() function, but into the the Main Activity class, writes:
+		
+			override fun onSaveInstanceState(outState: Bundle) {
+				super.onSaveInstanceState(outState)
+				Log.i(TAG, "Método onSaveInstanceState()")
+
+				outState.putCharSequence("txtPrueba", txtID.text)
+				outState.putCharSequence("txtPasswd", txtPasswd.text)
+			}
+		
+			override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+				super.onRestoreInstanceState(savedInstanceState)
+				Log.i(TAG, "Método onRestoreInstanceState()")
+
+				txtID.setText(savedInstanceState?.getCharSequence("txtPrueba"))
+				txtPasswd.setText(savedInstanceState?.getCharSequence("txtPasswd"))
+			}
+			
+	- Saves Changes
+
+
+Step 10 - Test your application again		
+
+
+Step 11 - Be Happy...!
