@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.a08_navigation_01.databinding.FragmentNotificationsBinding
+import com.example.a08_navigation_01.R
 
 class NotificationsFragment : Fragment() {
 
@@ -22,18 +23,15 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
-
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        var text_notifications = root.findViewById<TextView>(R.id.text_notifications)
+        text_notifications.setText(R.string.message_notifications)
+
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

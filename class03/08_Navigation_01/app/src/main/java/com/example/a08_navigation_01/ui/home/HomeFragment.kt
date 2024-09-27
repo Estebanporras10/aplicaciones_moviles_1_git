@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.a08_navigation_01.databinding.FragmentHomeBinding
+import com.example.a08_navigation_01.R
 
 class HomeFragment : Fragment() {
 
@@ -22,18 +23,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        var text_home = root.findViewById<TextView>(R.id.text_home)
+        text_home.setText(R.string.message_home)
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

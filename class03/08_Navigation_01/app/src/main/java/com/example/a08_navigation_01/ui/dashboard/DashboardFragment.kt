@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.a08_navigation_01.databinding.FragmentDashboardBinding
+import com.example.a08_navigation_01.R
 
 class DashboardFragment : Fragment() {
 
@@ -22,16 +23,11 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        var text_dashboard = root.findViewById<TextView>(R.id.text_dashboard)
+        text_dashboard.setText(R.string.message_dashboard)
         return root
     }
 
