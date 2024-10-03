@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Lab1_problema1</string>
+    <string name="content_image_main">main image</string>
+    <string name="image_1">image 2</string>
+    <string name="image_2">image 3</string>
+    <string name="image_3">image 4</string>
+    <string name="image_4">image 5</string>
+    <string name="image_5">image 6</string>
+    <string name="image_6">image 7</string>
+    <string name="image_7">image 8</string>
+    <string name="image_8">image 9</string>
+    <string name="image_9">image 10</string>
+</resources>

@@ -1,0 +1,272 @@
+===============================================================================================
+Institute....: Universidad Técnica Nacional
+Campus.......: Pacífico
+Career.......: Tecnologías de Información
+Course.......: ITI-623 - Desarrollo de Aplicaciones Móviles I
+Period.......: 3-2024
+Document.....: 05_Rotate.txt
+Goals........: Demonstrate the definition of interface with portrait and landscape view
+References...: https://developer.android.com/studio/write/layout-editor
+Professor....: Jorge Ruiz (york)
+Student......:
+===============================================================================================
+
+Step 01 - Open Android Studio (Giraffe version)
+
+
+Step 02 - Create Empty Views Activity
+
+	Name...........: 05_Rotate
+	Package name...: com.demoyork.a05_rotate
+	Save location..: D:\Documentos\Laboratorios\Android\3_2024\05_Rotate
+	Language.......: Kotlin
+	Minimum SDK....: API 30 ("R", Android 11.0)
+	Build Config...: Kotlin DSL (build.gradle.kts)[Recommended]
+	
+	
+Step 03 - Custom application images
+
+	- Download botones.zip (content png files) at your local machine
+	
+	- Right click over app (root Android project)
+		- Select New option
+			- Select Image Asset option
+							
+				- Icon type...: Launcher Icons (Legacy only)
+				- Name........: <changes name for each file>
+				- Asset type..: image
+				- Path........: select image path
+				- Trim........: Yes
+				- Padding.....: 0
+				- Background..: FFFFFF
+				- Scaling.....: Shrink to fit
+				- Shape.......: Square
+				- Effect......: None
+				
+				
+			- Click on Next button
+
+			- Click in Finish button
+			
+	- Repeat for all images
+
+
+Step 04 - Create activity_main layout (Landscape)
+
+	- Open	app/res/layout/activity_main.xml
+	
+		Press combobox activity_main.xml in upper left corner in the 
+		interface design window
+		
+		Select create landscape 
+		
+		
+Step 05 - Update content of activity_main layout (portrait)
+
+	- Delete all content.
+		
+	- Writes the next code:	
+
+		<?xml version="1.0" encoding="utf-8"?>
+		<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:app="http://schemas.android.com/apk/res-auto"
+			xmlns:tools="http://schemas.android.com/tools"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:context=".MainActivity">
+
+
+			<TableLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginStart="16dp"
+				android:layout_marginTop="16dp"
+				android:layout_marginEnd="16dp"
+				android:layout_marginBottom="16dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent">
+
+
+				<TableRow
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="128sp"
+						android:src="@mipmap/andpersand" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/android" />
+
+				</TableRow>
+
+				<TableRow
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/angular" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="128sp"
+						android:src="@mipmap/bluetooh" />
+
+				</TableRow>
+				
+				<TableRow
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/cube" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/docker" />
+
+				</TableRow>
+
+				<TableRow
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="128sp"
+						android:src="@mipmap/dropbox" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/jabali" />
+
+				</TableRow>
+
+				<TableRow
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/kraken" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="128sp"
+						android:src="@mipmap/px500" />
+
+				</TableRow>
+
+			</TableLayout>
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	
+	
+	- Saves Changes
+	
+
+Step 06 - Update content of activity_main layout (landscape)
+
+	- Delete all content.
+		
+	- Writes the next code:	
+	
+		<?xml version="1.0" encoding="utf-8"?>
+		<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:app="http://schemas.android.com/apk/res-auto"
+			xmlns:tools="http://schemas.android.com/tools"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:context=".MainActivity">
+
+			<TableLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginStart="16dp"
+				android:layout_marginTop="16dp"
+				android:layout_marginEnd="16dp"
+				android:layout_marginBottom="16dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent">
+
+				<TableRow
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="128sp"
+						android:src="@mipmap/andpersand" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/android" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/angular" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="128sp"
+						android:src="@mipmap/bluetooh" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/cube" />
+				</TableRow>
+
+				<TableRow
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/docker" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="128sp"
+						android:src="@mipmap/dropbox" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/jabali" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="129sp"
+						android:src="@mipmap/kraken" />
+
+					<ImageView
+						android:layout_width="128sp"
+						android:layout_height="128sp"
+						android:src="@mipmap/px500" />
+				</TableRow>
+			</TableLayout>
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	
+	- Saves changes
+	
+
+Step 07 - Run new application
+
+	Be happy
